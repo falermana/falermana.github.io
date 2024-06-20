@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>随机一言Phone</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const wakeLock = await navigator.wakeLock.request('screen');
+                console.log('Screen Wake Lock is active');
+        
+                // 在页面卸载时释放锁定
+                window.addEventListener('beforeunload', () => {
+                    wakeLock.release();
+                    console.log('Screen Wake Lock released');
+                });
+            } catch (err) {
+                console.error('Wake Lock is not supported or not granted:', err);
+            }
+        });
+    </script>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
