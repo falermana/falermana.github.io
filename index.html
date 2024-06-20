@@ -17,6 +17,7 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+			opacity: 0.99999;
         }
         h1 {
             font-size: 24px;
@@ -29,6 +30,7 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             background-color: #fafafa;
+			opacity: 0.9;
         }
         .search-info div {
             margin-bottom: 10px;
@@ -66,6 +68,8 @@
             background-color: #fafafa;
             margin-bottom: 10px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            opacity: 0.9; /* 设置透明度为50% */
+            filter: alpha(opacity=90); /* 兼容旧版本的IE浏览器 */
         }
         .search-history-item p {
             margin: 0;
@@ -81,10 +85,26 @@
             color: #FFA500;
             margin-top: 10px;
         }
+		video {
+		  position: fixed;
+		  right: 0;
+		  bottom: 0;
+		  min-width: 100%;
+		  min-height: 100%;
+		  width: 1920px;
+		  height: 1080px; 
+		  z-index: -1000;
+		  background: url(posterframe.jpg) no-repeat;
+		  background-size: cover;
+		}
     </style>
 </head>
 <body>
 <main>
+    <video autoplay muted loop>
+        <source src="background.mp4" type="video/mp4">
+        你的浏览器不支持视频背景
+    </video>
     <div class="search-info">
         <div>当前搜索词：<span id="current-search-word">等待倒计时结束...</span></div>
         <div>启动自动搜索中：<span id="countdown-timer">加载中...</span></div>
@@ -280,7 +300,7 @@
 
     function initializeCountdown() {
         const countdownElement = document.getElementById('countdown-timer');
-        let initialCountdown = Math.floor(Math.random() * 60) + 60; 
+        let initialCountdown = Math.floor(Math.random() * 120) + 60; // 随机生成 60 到 120 秒的倒计时
         countdownElement.textContent = initialCountdown;
 
         countdownWorker = new Worker(URL.createObjectURL(new Blob([`
@@ -325,7 +345,7 @@ document.getElementById("deleteDataButton").addEventListener("click", function()
     document.getElementById('completed-searches').textContent = '0';
     setTimeout(() => {
          window.location.reload();
-      }, 2000);
+   }, 2000);
 });
 
     document.getElementById('start-button').addEventListener('click', startAutoSearch);
