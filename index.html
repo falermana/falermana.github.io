@@ -17,7 +17,6 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-			opacity: 0.99999;
         }
         h1 {
             font-size: 24px;
@@ -30,7 +29,6 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             background-color: #fafafa;
-			opacity: 0.9;
         }
         .search-info div {
             margin-bottom: 10px;
@@ -68,8 +66,6 @@
             background-color: #fafafa;
             margin-bottom: 10px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            opacity: 0.9; /* 设置透明度为50% */
-            filter: alpha(opacity=90); /* 兼容旧版本的IE浏览器 */
         }
         .search-history-item p {
             margin: 0;
@@ -85,36 +81,37 @@
             color: #FFA500;
             margin-top: 10px;
         }
-		video {
-		  position: fixed;
-		  right: 0;
-		  bottom: 0;
-		  min-width: 100%;
-		  min-height: 100%;
-		  width: auto;
-		  height: auto; 
-		  background: url(posterframe.jpg) no-repeat;
-		  background-size: cover;
-		}
+        #video {
+            position: fixed; /* 使用固定定位 */
+            bottom: 20px; /* 调整底部间距 */
+            left: 20px; /* 可根据需要调整左右间距 */
+            width: 200px; /* 设置合适的宽度 */
+            height: auto; /* 让高度自适应 */
+            border: 1px solid #ccc; /* 边框 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            border-radius: 8px; /* 圆角 */
+            z-index: 1000; /* 确保视频在其他内容上方显示 */
+        }
     </style>
 </head>
 <body>
 <main>
-    <iframe style="display: none;"><video autoplay muted loop>
-        <source src="background.mp4" type="video/mp4">
-        你的浏览器不支持视频背景
-    </video></iframe>
     <div class="search-info">
         <div>当前搜索词：<span id="current-search-word">等待倒计时结束...</span></div>
         <div>启动自动搜索中：<span id="countdown-timer">加载中...</span></div>
         <div>本轮已完成搜索：<span id="completed-searches">0</span> 次</div>
         <div>总计已完成搜索：<span id="total-searches">0</span> 次</div>
     </div>
+
     <button id="start-button">开始</button>
     <button id="stop-button">停止</button>
     <button id="deleteDataButton">清空计数</button>
     <h2>搜索历史</h2>
     <div id="search-history"></div>
+	<video autoplay muted loop id="video">
+        <source src="background.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 </main>
 
 <script>
