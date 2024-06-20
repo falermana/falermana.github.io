@@ -91,9 +91,8 @@
 		  bottom: 0;
 		  min-width: 100%;
 		  min-height: 100%;
-		  width: 1920px;
-		  height: 1080px; 
-		  z-index: -1000;
+		  width: auto;
+		  height: auto; 
 		  background: url(posterframe.jpg) no-repeat;
 		  background-size: cover;
 		}
@@ -101,10 +100,10 @@
 </head>
 <body>
 <main>
-    <video autoplay muted loop>
+    <iframe style="display: none;"><video autoplay muted loop>
         <source src="background.mp4" type="video/mp4">
         你的浏览器不支持视频背景
-    </video>
+    </video></iframe>
     <div class="search-info">
         <div>当前搜索词：<span id="current-search-word">等待倒计时结束...</span></div>
         <div>启动自动搜索中：<span id="countdown-timer">加载中...</span></div>
