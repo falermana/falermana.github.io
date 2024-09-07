@@ -14,28 +14,47 @@
             padding: 0;
         }
 
-      .container {
+        .container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-      .button {
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .button {
             display: inline-block;
             padding: 15px 30px;
             background-color: #3498db;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            margin: 10px;
+            border: none;
+            border-radius: 8px;
             font-size: 18px;
-            transition: background-color 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin: 10px;
         }
 
-      .button:hover {
+        .button:hover {
             background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .button {
+                width: 100%;
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
@@ -43,46 +62,124 @@
 <body>
     <div class="container">
         <h1>阿里云签到导航</h1>
-        <a href="https://developer.aliyun.com/article/new?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.91.1b151721OgPd1j#/" target="_blank" class="button">每日任务-发文章-转评赞关注</a>
-        <a href="https://developer.aliyun.com/ask/unsolvedQuestionsWithProduct?spm=a2c6h.13066354.ask-index.dunsolvedWithProduct.63ef5b71uAt594" target="_blank" class="button">每日任务-写回答</a>
-        <a href="https://developer.aliyun.com/live/?spm=a2c6h.27120161.J_7073166060.3.1b151721OgPd1j" target="_blank" class="button">每日任务-看视频</a>
-        <a href="https://developer.aliyun.com/?spm=a2c6h.17735062.nav-v2-dropdown-menu-2.d_main_3_0.7bad42f1ioR6G3&scm=20140722.M_9489675._.V_1" target="_blank" class="button">社区每日一签</a>
-        <button onclick="openAllLinks()" class="button">一键打开所有剩余社区（取消弹窗拦截）</button>
-        <a href="https://developer.aliyun.com/mission?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.67.31431721v6bo7V" target="_blank" class="button">任务中心-切换到活动任务看最新福利</a>
-        <a href="https://developer.aliyun.com/score" target="_blank" class="button">完成任务后-领取积分</a>
-        <a href="https://developer.aliyun.com/explore?spm=a2c6h.12883283.index.19.228a4307sqdiGm" target="_blank" class="button">没事来看一下有没有新开可以签到的社区</a>
+        <button id="loginButton" class="button">登录</button>
+        <button id="blogButton" class="button">社区签到+关注十人+四连五次</button>
+        <button id="videoButton" class="button">看一次视频</button>
+        <button id="articleButton" class="button">发文三篇</button>
+        <button id="answerButton" class="button">回答十条</button>
+        <button id="getButton" class="button">完成任务后-领取积分</button>
+        <button id="listButton" class="button">查看最新福利和新积分规则</button>
     </div>
-     <script src="https://lingtu.gitlab.io/links.js" defer></script>
+    <script src="https://lingtu.gitlab.io/links.js" defer></script>
     <script>
-        function openAllLinks() {
-            const links = [
-                "https://developer.aliyun.com/group/yunxiao/?spm=a2c6h.28398079.J_9795074090.58.4ade326ezS9BOe",
-                "https://developer.aliyun.com/group/aliyun_linux/?spm=a2c6h.28398079.J_9795074090.62.4ade326ezS9BOe",
-                "https://developer.aliyun.com/modelscope/?spm=a2c6h.28398079.J_9795074090.42.4ade326ezS9BOe",
-                "https://developer.aliyun.com/bigdata/?spm=a2c6h.28398079.J_9795074090.38.4ade326ezS9BOe",
-                "https://developer.aliyun.com/polardb/?spm=a2c6h.28398079.J_9795074090.34.4ade326ezS9BOe",
-                "https://developer.aliyun.com/cloudnative/?spm=a2c6h.28398079.J_9795074090.18.4ade326ezS9BOe",
-                "https://developer.aliyun.com/storage/?spm=a2c6h.28398079.J_9795074090.22.4ade326ezS9BOe",
-                "https://developer.aliyun.com/group/networking/?spm=a2c6h.28398079.J_9795074090.26.4ade326ezS9BOe",
-                "https://developer.aliyun.com/database/?spm=a2c6h.28398079.J_9795074090.30.4ade326ezS9BOe",
-                "https://developer.aliyun.com/ecs/?spm=a2c6h.28398079.J_9795074090.2.4ade326ezS9BOe",
-                "https://developer.aliyun.com/computenest/?spm=a2c6h.28398079.J_9795074090.6.4ade326ezS9BOe",
-                "https://developer.aliyun.com/yitian/?spm=a2c6h.28398079.J_9795074090.10.4ade326ezS9BOe",
-                "https://developer.aliyun.com/group/wuying/?spm=a2c6h.28398079.J_9795074090.14.4ade326ezS9BOe",
-                "https://developer.aliyun.com/group/viapi/?spm=a2c6h.28398079.J_9795074090.46.4ade326ezS9BOe",
-                "https://developer.aliyun.com/iot/?spm=a2c6h.28398079.J_9795074090.54.4ade326ezS9BOe",
-                "https://developer.aliyun.com/group/dns/?spm=a2c6h.28398079.J_9795074090.50.4ade326ezS9BOe"
-            ];
+        // 功能区
+        // 登录
+        const loginLink = ["https://account.aliyun.com/login/login.htm"];
+        // 社区签到
+        const blogLinks = [
+            "https://developer.aliyun.com/?spm=a2c6h.17735062.J_eBhO-wcawiLJRkGqHmozR.1.76b45b17dfjPK3",
+            "https://developer.aliyun.com/modelscope/?spm=a2c6h.27925324.J_eBhO-wcawiLJRkGqHmozR.74.7e4e5425aMvM2r",
+            "https://developer.aliyun.com/cloudnative/?spm=a2c6h.27925324.J_eBhO-wcawiLJRkGqHmozR.74.7b394c93PRLaED",
+            "https://developer.aliyun.com/bigdata/?spm=a2c6h.12873639.article-detail.2.4734377b9Dpvzv",
+            "https://developer.aliyun.com/database/?spm=a2c6h.27925324.detail.2.65ab22539515Ai",
+            "https://developer.aliyun.com/ecs/?spm=a2c6h.27925324.J_eBhO-wcawiLJRkGqHmozR.2.3ce13cd5q2ExPP",
+            "https://developer.aliyun.com/polardb/?spm=a2c6h.27925324.J_eBhO-wcawiLJRkGqHmozR.2.193152c48g0Vcb",
+            "https://developer.aliyun.com/group/yunxiao/?spm=a2c6h.27925324.J_eBhO-wcawiLJRkGqHmozR.2.48ea657c68xBki",
+            "https://developer.aliyun.com/storage/?spm=a2c6h.27925324.J_eBhO-wcawiLJRkGqHmozR.2.11ba71e6FbzeBR",
+            "https://developer.aliyun.com/group/networking/?spm=a2c6h.27925324.J_eBhO-wcawiLJRkGqHmozR.2.1cad24985CFbje",
+            "https://developer.aliyun.com/group/aliyun_linux/?spm=a2c6h.17735062.J_eBhO-wcawiLJRkGqHmozR.2.386259d6wIRYSu",
+            "https://developer.aliyun.com/modelstudio/?spm=a2c6h.17735062.J_eBhO-wcawiLJRkGqHmozR.2.31ab6379QMm0uz",
+            "",
+            "https://developer.aliyun.com/computenest/?spm=a2c6h.17735062.J_eBhO-wcawiLJRkGqHmozR.2.72d05b177J6IFH",
+            "https://developer.aliyun.com/iot/?spm=a2c6h.27925324.J_eBhO-wcawiLJRkGqHmozR.2.198e1c479k8aoN",
+            "https://developer.aliyun.com/group/dns/?spm=a2c6h.27925324.J_eBhO-wcawiLJRkGqHmozR.2.533d7377CHfS06",
+            "https://developer.aliyun.com/yitian/?spm=a2c6h.27925324.detail.2.458656f120Mi0B",
+            "https://developer.aliyun.com/group/viapi/?spm=a2c6h.17735062.J_eBhO-wcawiLJRkGqHmozR.2.476d4b16zRwdfF",
+            "https://developer.aliyun.com/group/wuying/?spm=a2c6h.17735062.J_eBhO-wcawiLJRkGqHmozR.2.21f63da3LeIMIo",
+            "https://developer.aliyun.com/tongyi/?spm=a2c6h.17735062.J_eBhO-wcawiLJRkGqHmozR.2.4d0c6515zCRMG9"
+        ];
+        // 看一次视频
+        const videoLink = ["https://developer.aliyun.com/live/?spm=a2c6h.27120161.J_7073166060.3.260e1721fNRlMg"];
+        // 发文3篇
+        const articleLink = [
+            "https://developer.aliyun.com/article/new?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.91.1b151721OgPd1j#/",
+            "https://developer.aliyun.com/article/new?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.91.1b151721OgPd1j#/",
+            "https://developer.aliyun.com/article/new?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.91.1b151721OgPd1j#/"
+        ];
+        // 回答10个
+        const answerLink = [
+            "https://developer.aliyun.com/ask/unsolvedQuestionsWithProduct?spm=a2c6h.13066354.ask-index.dunsolvedWithProduct.63ef5b71uAt594"
+        ];
+        // 领取积分
+        const getLink = ["https://developer.aliyun.com/mission?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.67.31431721v6bo7V"];
+        // 查看最新任务
+        const listLink = ["https://developer.aliyun.com/mission?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.67.31431721v6bo7V"];
+        // 原有的打开链接函数保持不变
+        function openAllLinks(linkArray) {
             let index = 0;
             const interval = setInterval(() => {
-                if (index < links.length) {
-                    window.open(links[index], '_blank');
+                if (index < linkArray.length) {
+                    window.open(linkArray[index], '_blank');
                     index++;
                 } else {
                     clearInterval(interval);
                 }
             }, 1000);
         }
+        // 初始化所有按钮的点击计数器
+        const buttonCounts = {
+            loginButton: 0,
+            blogButton: 0,
+            videoButton: 0,
+            articleButton: 0,
+            answerButton: 0,
+            getButton: 0,
+            listButton: 0
+        };
+
+        // 定义颜色变化函数
+        function changeButtonColor(buttonId, color) {
+            document.getElementById(buttonId).style.backgroundColor = color;
+        }
+
+        // 给每个按钮添加点击事件处理程序
+        function handleButtonClick(buttonId, linkArray) {
+            return function () {
+                // 获取当前按钮的点击次数
+                let count = buttonCounts[buttonId];
+                // 根据点击次数设置不同的颜色
+                switch (++count % 5) { // 每五次重置计数器
+                    case 1:
+                        changeButtonColor(buttonId, 'orange');
+                        break;
+                    case 2:
+                        changeButtonColor(buttonId, 'green');
+                        break;
+                    case 3:
+                        changeButtonColor(buttonId, 'brown');
+                        break;
+                    case 4:
+                        changeButtonColor(buttonId, 'purple');
+                        break;
+                    case 0:
+                        changeButtonColor(buttonId, 'red');
+                        break;
+                }
+                // 更新计数器
+                buttonCounts[buttonId] = count;
+                // 打开链接
+                openAllLinks(linkArray);
+            };
+        }
+
+        // 替换原有的事件绑定
+        document.getElementById('loginButton').addEventListener('click', handleButtonClick('loginButton', loginLink));
+        document.getElementById('blogButton').addEventListener('click', handleButtonClick('blogButton', blogLinks));
+        document.getElementById('videoButton').addEventListener('click', handleButtonClick('videoButton', videoLink));
+        document.getElementById('articleButton').addEventListener('click', handleButtonClick('articleButton', articleLink));
+        document.getElementById('answerButton').addEventListener('click', handleButtonClick('answerButton', answerLink));
+        document.getElementById('getButton').addEventListener('click', handleButtonClick('getButton', getLink));
+        document.getElementById('listButton').addEventListener('click', handleButtonClick('listButton', listLink));
     </script>
 </body>
 
