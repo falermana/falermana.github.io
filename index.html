@@ -69,6 +69,10 @@
         <button id="answerButton" class="button">回答十条</button>
         <button id="getButton" class="button">完成任务后-领取积分</button>
         <button id="listButton" class="button">查看最新福利和新积分规则</button>
+        <button id="ujavaButton" class="button">user：java的细水长流</button>
+        <button id="cButton" class="button">user：c的前世今生</button>
+        <button id="htmlButton" class="button">user：html的七十二变</button>
+
     </div>
     <script src="https://lingtu.gitlab.io/links.js" defer></script>
     <script>
@@ -114,6 +118,12 @@
         const getLink = ["https://developer.aliyun.com/mission?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.67.31431721v6bo7V"];
         // 查看最新任务
         const listLink = ["https://developer.aliyun.com/mission?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.67.31431721v6bo7V"];
+        // Java的细水长流主页
+        const ujavaLink = ["https://developer.aliyun.com/profile/rxl52vwtiluny?spm=a2c6h.12873639.article-detail.9.42cb7c65rTtbrK"];
+        // c的前世今生主页
+        const cLink = ["https://developer.aliyun.com/profile/27ur2cslks2rk?spm=a2c6h.12873639.article-detail.23.e7f974b0Ib8awM"];
+        // html的七十二变主页
+        const htmlLink = ["https://developer.aliyun.com/profile/dsnmvtuxoyeqg?spm=a2c6h.13262185.profile.4.16d47c496tcHwT"];
         // 原有的打开链接函数保持不变
         function openAllLinks(linkArray) {
             let index = 0;
@@ -134,7 +144,10 @@
             articleButton: 0,
             answerButton: 0,
             getButton: 0,
-            listButton: 0
+            listButton: 0,
+            ujavaButton: 0,
+            cButton: 0,
+            htmlButton: 0
         };
 
         // 定义颜色变化函数
@@ -180,6 +193,9 @@
         document.getElementById('answerButton').addEventListener('click', handleButtonClick('answerButton', answerLink));
         document.getElementById('getButton').addEventListener('click', handleButtonClick('getButton', getLink));
         document.getElementById('listButton').addEventListener('click', handleButtonClick('listButton', listLink));
+        document.getElementById('ujavaButton').addEventListener('click', handleButtonClick('ujavaButton', ujavaLink));
+        document.getElementById('cButton').addEventListener('click', handleButtonClick('cButton', cLink));
+        document.getElementById('htmlButton').addEventListener('click', handleButtonClick('htmlButton', htmlLink));
     </script>
 </body>
 
