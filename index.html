@@ -72,12 +72,10 @@
         }
 
         .quote-container {
-            display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
             height: 80px;
-            position: sticky;
             bottom: 0;
             z-index: 1000;
         }
@@ -91,14 +89,14 @@
             align-items: center;
             justify-content: center;
             max-width: 100%;
+            word-wrap: break-word;
+            white-space: normal;
             overflow: hidden;
-            text-overflow: ellipsis;
-            position: relative;
         }
 
         .typing-effect {
             overflow: hidden;
-            white-space: nowrap;
+            white-space: normal;
             position: relative;
         }
 
@@ -236,10 +234,8 @@
         // 给每个按钮添加点击事件处理程序
         function handleButtonClick(buttonId, linkArray) {
             return function () {
-                // 获取当前按钮的点击次数
                 let count = buttonCounts[buttonId];
-                // 根据点击次数设置不同的颜色
-                switch (++count % 5) { // 每五次重置计数器
+                switch (++count % 5) {
                     case 1:
                         changeButtonColor(buttonId, '#00b3b0');
                         break;
