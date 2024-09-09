@@ -16,7 +16,6 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
         .container {
             display: flex;
             flex-direction: column;
@@ -26,20 +25,17 @@
             /* 让容器根据内容自适应高度 */
             padding: 20px;
         }
-
         h1 {
             font-size: 2.5em;
             color: #333;
             margin-bottom: 20px;
         }
-
         .button-row {
             display: flex;
             justify-content: space-between;
             width: 100%;
             max-width: 600px;
         }
-
         .button {
             display: inline-block;
             padding: 15px 30px;
@@ -93,13 +89,11 @@
             white-space: normal;
             overflow: hidden;
         }
-
         .typing-effect {
             overflow: hidden;
             white-space: normal;
             position: relative;
         }
-
         .cursor {
             display: inline-block;
             width: 2px;
@@ -108,7 +102,6 @@
             margin-left: 5px;
             animation: blink 1s infinite;
         }
-
         @keyframes blink {
             50% {
                 opacity: 0;
@@ -141,8 +134,6 @@
             <button id="htmlButton" class="button">感谢：html的七十二变</button>
         </div>
     </div>
-
-    <!-- 名言区域增加clickable-quote用于绑定点击事件 -->
     <div class="quote-container">
         <div class="quote">
             <span class="typing-effect clickable-quote" id="quoteOfTheDay"></span>
