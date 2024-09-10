@@ -16,6 +16,7 @@
             flex-direction: column;
             min-height: 100vh;
         }
+
         .container {
             display: flex;
             flex-direction: column;
@@ -25,17 +26,20 @@
             /* 让容器根据内容自适应高度 */
             padding: 20px;
         }
+
         h1 {
             font-size: 2.5em;
             color: #333;
             margin-bottom: 20px;
         }
+
         .button-row {
             display: flex;
             justify-content: space-between;
             width: 100%;
             max-width: 600px;
         }
+
         .button {
             display: inline-block;
             padding: 15px 30px;
@@ -67,6 +71,24 @@
             }
         }
 
+        .input {
+            width: calc(80% - 60px);
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
+            outline: none;
+            background-color: #b6dffa;
+            color: #181818;
+            margin: 10px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        /* 当输入框获得焦点时改变边框颜色 */
+        .input:focus {
+            border-color: #3498db;
+        }
+
         .quote-container {
             justify-content: center;
             align-items: center;
@@ -89,11 +111,13 @@
             white-space: normal;
             overflow: hidden;
         }
+
         .typing-effect {
             overflow: hidden;
             white-space: normal;
             position: relative;
         }
+
         .cursor {
             display: inline-block;
             width: 2px;
@@ -102,6 +126,7 @@
             margin-left: 5px;
             animation: blink 1s infinite;
         }
+
         @keyframes blink {
             50% {
                 opacity: 0;
@@ -114,24 +139,32 @@
     <div class="container">
         <h1>阿里云签到导航</h1>
         <div class="button-row">
-            <button id="loginButton" class="button">登录</button>
-            <button id="blogButton" class="button">社区签到+关注十人</button>
+            <button id="loginButton" class="button">注意登录</button>
+            <button id="blogButton" class="button">社区签到</button>
         </div>
         <div class="button-row">
-            <button id="videoButton" class="button">看一次视频</button>
-            <button id="articleButton" class="button">发文三篇+四连五次</button>
+            <button id="videoButton" class="button">看一视频</button>
+            <button id="ujavaButton" class="button">感谢: J<sup>文&答×5</sup></button>
         </div>
         <div class="button-row">
-            <button id="answerButton" class="button">回答十条+点赞五条</button>
-            <button id="getButton" class="button">完成任务后-领取积分</button>
+            <button id="cButton" class="button">感谢: C<sup>文&答×5</sup></button>
+            <button id="htmlButton" class="button">感谢: H<sup>文&答sp×5</sup></button>
         </div>
         <div class="button-row">
-            <button id="listButton" class="button">查看最新福利和新积分规则</button>
-            <button id="ujavaButton" class="button">感谢：java的细水长流</button>
+            <input class="input" type="text" id="linkInput" value="">
+            <button id="markButton" class="button">书评一本</button>
         </div>
         <div class="button-row">
-            <button id="cButton" class="button">感谢：c的前世今生</button>
-            <button id="htmlButton" class="button">感谢：html的七十二变</button>
+            <input class="input" type="text" id="textInput" value="">
+            <button id="updateTextButton" class="button">保存书名</button>
+        </div>
+        <div class="button-row">
+            <button id="articleButton" class="button">发文三篇</button>
+            <button id="answerButton" class="button">回答十条</button>
+        </div>
+        <div class="button-row">
+            <button id="getButton" class="button">完成任务-领取积分</button>
+            <button id="listButton" class="button">任务中心-查看最新福利</button>
         </div>
     </div>
     <div class="quote-container">
@@ -181,8 +214,8 @@
         const answerLink = [
             "https://developer.aliyun.com/ask/unsolvedQuestionsWithProduct?spm=a2c6h.13066354.ask-index.dunsolvedWithProduct.63ef5b71uAt594"
         ];
-        // 领取积分
-        const getLink = ["https://developer.aliyun.com/mission?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.67.31431721v6bo7V"];
+        // 书评一本
+        const getLink = ["https://developer.aliyun.com/score?spm=a2c6h.12873639.J_eBhO-wcawiLJRkGqHmozR.87.73eb7f6fc6H8Q9"];
         // 查看最新任务
         const listLink = ["https://developer.aliyun.com/mission?spm=a2c6h.27120161.J_eBhO-wcawiLJRkGqHmozR.67.31431721v6bo7V"];
         // Java的细水长流主页
@@ -261,8 +294,35 @@
         document.getElementById('ujavaButton').addEventListener('click', handleButtonClick('ujavaButton', ujavaLink));
         document.getElementById('cButton').addEventListener('click', handleButtonClick('cButton', cLink));
         document.getElementById('htmlButton').addEventListener('click', handleButtonClick('htmlButton', htmlLink));
+        /* 书评逻辑 */
+        document.addEventListener('DOMContentLoaded', () => {
+            const linkInput = document.getElementById('linkInput');
+            const textInput = document.getElementById('textInput');
+            const storedLink = localStorage.getItem('link') || '';
+            const storedText = localStorage.getItem('text') || '';
+            linkInput.value = `保存链接：${storedLink}`;
+            textInput.value = `页&书名：${storedText}`;
+        });
 
-        // 获取名人名言并更新到页面
+        // 点击左边按钮打开链接并更新本地存储
+        document.getElementById('markButton').addEventListener('click', () => {
+            const linkInput = document.getElementById('linkInput');
+            const link = linkInput.value.replace('保存链接：', '');
+            if (link) {
+                localStorage.setItem('link', link);
+                window.open(link, '_blank');
+            }
+        });
+
+        // 点击右边按钮更新本地存储的文字
+        document.getElementById('updateTextButton').addEventListener('click', () => {
+            const textInput = document.getElementById('textInput');
+            const text = textInput.value.replace('页&书名：', '');
+            if (text) {
+                localStorage.setItem('text', text);
+            }
+        });
+        /* 底部一言逻辑 */
         // 定义 fetchAndDisplayQuote 函数
         async function fetchAndDisplayQuote() {
             try {
