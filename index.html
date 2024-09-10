@@ -151,11 +151,11 @@
             <button id="htmlButton" class="button">感谢: H<sup>文&答sp×5</sup></button>
         </div>
         <div class="button-row">
-            <input class="input" type="text" id="linkInput" value="">
+            <input class="input" type="text" id="linkInput" value="" placeholder="输入需要打开的链接（自动保存）">
             <button id="markButton" class="button">书评一本</button>
         </div>
         <div class="button-row">
-            <input class="input" type="text" id="textInput" value="">
+            <input class="input" type="text" id="textInput" value="" placeholder="输入今天评分的书名">
             <button id="updateTextButton" class="button">保存书名</button>
         </div>
         <div class="button-row">
@@ -295,19 +295,18 @@
         document.getElementById('cButton').addEventListener('click', handleButtonClick('cButton', cLink));
         document.getElementById('htmlButton').addEventListener('click', handleButtonClick('htmlButton', htmlLink));
         /* 书评逻辑 */
+        // 页面加载时从本地存储读取链接和文字并显示在输入框中
         document.addEventListener('DOMContentLoaded', () => {
             const linkInput = document.getElementById('linkInput');
             const textInput = document.getElementById('textInput');
-            const storedLink = localStorage.getItem('link') || '';
-            const storedText = localStorage.getItem('text') || '';
-            linkInput.value = `保存链接：${storedLink}`;
-            textInput.value = `页&书名：${storedText}`;
+            linkInput.value = localStorage.getItem('link') || '';
+            textInput.value = localStorage.getItem('text') || '';
         });
 
         // 点击左边按钮打开链接并更新本地存储
         document.getElementById('markButton').addEventListener('click', () => {
             const linkInput = document.getElementById('linkInput');
-            const link = linkInput.value.replace('保存链接：', '');
+            const link = linkInput.value;
             if (link) {
                 localStorage.setItem('link', link);
                 window.open(link, '_blank');
@@ -317,7 +316,7 @@
         // 点击右边按钮更新本地存储的文字
         document.getElementById('updateTextButton').addEventListener('click', () => {
             const textInput = document.getElementById('textInput');
-            const text = textInput.value.replace('页&书名：', '');
+            const text = textInput.value;
             if (text) {
                 localStorage.setItem('text', text);
             }
