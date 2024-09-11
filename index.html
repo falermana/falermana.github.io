@@ -141,30 +141,34 @@
         <div class="button-row">
             <button id="loginButton" class="button">注意登录</button>
             <button id="blogButton" class="button">社区签到</button>
+            <button id="ujavaButton" class="button">感谢: J<sup>文答5</sup></button>
         </div>
         <div class="button-row">
-            <button id="videoButton" class="button">看一视频</button>
-            <button id="ujavaButton" class="button">感谢: J<sup>文&答×5</sup></button>
+            <button id="cButton" class="button">感谢: C<sup>文答5</sup></button>
+            <button id="htmlButton" class="button">感谢: H<sup>文答5sp</sup></button>
+            <button id="articleButton" class="button">发文三篇</button>
         </div>
         <div class="button-row">
-            <button id="cButton" class="button">感谢: C<sup>文&答×5</sup></button>
-            <button id="htmlButton" class="button">感谢: H<sup>文&答sp×5</sup></button>
-        </div>
-        <div class="button-row">
-            <input class="input" type="text" id="linkInput" value="" placeholder="输入需要打开的链接（自动保存）">
+            <input class="input" type="text" id="linkInput" value="" placeholder="输入需要打开的书单链接（自动保存）">
             <button id="markButton" class="button">书评一本</button>
         </div>
         <div class="button-row">
             <input class="input" type="text" id="textInput" value="" placeholder="输入今天评分的书名">
             <button id="updateTextButton" class="button">保存书名</button>
         </div>
+
         <div class="button-row">
-            <button id="articleButton" class="button">发文三篇</button>
-            <button id="answerButton" class="button">回答十条</button>
+            <input class="input" type="text" id="vlinkInput" value="" placeholder="输入需要打开的视频链接（自动保存）">
+            <button id="vmarkButton" class="button">视频一个</button>
         </div>
         <div class="button-row">
-            <button id="getButton" class="button">完成任务-领取积分</button>
-            <button id="listButton" class="button">任务中心-查看最新福利</button>
+            <input class="input" type="text" id="vtextInput" value="" placeholder="输入今天看的视频标题">
+            <button id="vupdateTextButton" class="button">保存标题</button>
+        </div>
+        <div class="button-row">
+            <button id="answerButton" class="button">回答十条</button>
+            <button id="getButton" class="button">领取积分</button>
+            <button id="listButton" class="button">任务中心</button>
         </div>
     </div>
     <div class="quote-container">
@@ -202,8 +206,6 @@
             "https://developer.aliyun.com/group/wuying/?spm=a2c6h.17735062.J_eBhO-wcawiLJRkGqHmozR.2.21f63da3LeIMIo",
             "https://developer.aliyun.com/tongyi/?spm=a2c6h.17735062.J_eBhO-wcawiLJRkGqHmozR.2.4d0c6515zCRMG9"
         ];
-        // 看一次视频
-        const videoLink = ["https://developer.aliyun.com/live/?spm=a2c6h.27120161.J_7073166060.3.260e1721fNRlMg"];
         // 发文3篇
         const articleLink = [
             "https://developer.aliyun.com/article/new?spm=a2c6h.12883283.J_eBhO-wcawiLJRkGqHmozR.90.2cd54307HIMqfH#/",
@@ -240,14 +242,17 @@
         const buttonCounts = {
             loginButton: 0,
             blogButton: 0,
-            videoButton: 0,
             articleButton: 0,
             answerButton: 0,
             getButton: 0,
             listButton: 0,
             ujavaButton: 0,
             cButton: 0,
-            htmlButton: 0
+            htmlButton: 0,
+            markButton: 0,
+            updateTextButton: 0,
+            vmarkButton: 0,
+            vupdateTextButton: 0
         };
 
         // 定义颜色变化函数
@@ -286,7 +291,6 @@
         // 替换原有的事件绑定
         document.getElementById('loginButton').addEventListener('click', handleButtonClick('loginButton', loginLink));
         document.getElementById('blogButton').addEventListener('click', handleButtonClick('blogButton', blogLinks));
-        document.getElementById('videoButton').addEventListener('click', handleButtonClick('videoButton', videoLink));
         document.getElementById('articleButton').addEventListener('click', handleButtonClick('articleButton', articleLink));
         document.getElementById('answerButton').addEventListener('click', handleButtonClick('answerButton', answerLink));
         document.getElementById('getButton').addEventListener('click', handleButtonClick('getButton', getLink));
@@ -294,6 +298,7 @@
         document.getElementById('ujavaButton').addEventListener('click', handleButtonClick('ujavaButton', ujavaLink));
         document.getElementById('cButton').addEventListener('click', handleButtonClick('cButton', cLink));
         document.getElementById('htmlButton').addEventListener('click', handleButtonClick('htmlButton', htmlLink));
+
         /* 书评逻辑 */
         // 页面加载时从本地存储读取链接和文字并显示在输入框中
         document.addEventListener('DOMContentLoaded', () => {
@@ -321,6 +326,42 @@
                 localStorage.setItem('text', text);
             }
         });
+        // 书评按钮变色
+        document.getElementById('markButton').addEventListener('click', handleButtonClick('markButton', []));
+        document.getElementById('updateTextButton').addEventListener('click', handleButtonClick('updateTextButton', []));
+
+        /* 视频逻辑 */
+        // 页面加载时从本地存储读取链接和文字并显示在输入框中
+        document.addEventListener('DOMContentLoaded', () => {
+            const linkInput = document.getElementById('vlinkInput');
+            const textInput = document.getElementById('vtextInput');
+            linkInput.value = localStorage.getItem('vlink') || '';
+            textInput.value = localStorage.getItem('vtext') || '';
+        });
+
+        // 点击左边按钮打开链接并更新本地存储
+        document.getElementById('vmarkButton').addEventListener('click', () => {
+            const linkInput = document.getElementById('vlinkInput');
+            const link = linkInput.value;
+            if (link) {
+                localStorage.setItem('vlink', link);
+                window.open(link, '_blank');
+            }
+        });
+
+        // 点击右边按钮更新本地存储的文字
+        document.getElementById('vupdateTextButton').addEventListener('click', () => {
+            const textInput = document.getElementById('vtextInput');
+            const text = textInput.value;
+            if (text) {
+                localStorage.setItem('vtext', text);
+            }
+        });
+
+        // 视频按钮变色
+        document.getElementById('vmarkButton').addEventListener('click', handleButtonClick('vmarkButton', []));
+        document.getElementById('vupdateTextButton').addEventListener('click', handleButtonClick('vupdateTextButton', []));
+
         /* 底部一言逻辑 */
         // 定义 fetchAndDisplayQuote 函数
         async function fetchAndDisplayQuote() {
